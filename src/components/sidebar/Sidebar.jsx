@@ -32,90 +32,95 @@ export default function Sidebar() {
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState("Profile");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleLogout = ()=> navigate("/")
+  const handleLogout = () => navigate("/");
 
   const drawerContent = (
-    <Box sx={{ p: 2, mt: 3 }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          mb: 2,
-        }}
-      >
-        <Avatar sx={{ bgcolor: "#6c63ff", width: 56, height: 56 }}>YP</Avatar>
-        <Typography variant="subtitle1">Yash Pardeshi</Typography>
-        <Typography variant="caption">Associate Software Engineer</Typography>
+    <Box sx={{ p: 2, mt: 3, height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between" }}>
+      <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            mb: 2,
+          }}
+        >
+          <Avatar sx={{ bgcolor: "#6c63ff", width: 56, height: 56 }}>YP</Avatar>
+          <Typography variant="subtitle1">Yash Pardeshi</Typography>
+          <Typography variant="caption">Associate Software Engineer</Typography>
+        </Box>
+
+        <Divider sx={{ my: 2 }} />
+
+        <List
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: "100%",
+            // height:"100%",
+            maxHeight: "78vh",
+          }}
+        >
+          <Box>
+            <SidebarItem
+              icon={<Dashboard />}
+              label="Dashboard"
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+            />
+            <SidebarItem
+              icon={<Person2Icon />}
+              label="Profile"
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+            />
+            <SidebarItem
+              icon={<AccessTime />}
+              label="Attendance"
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+            />
+            <SidebarItem
+              icon={<Description />}
+              label="Payslips"
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+            />
+            <SidebarItem
+              icon={<AccountBalance />}
+              label="Salary Info"
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+            />
+            <SidebarItem
+              icon={<Settings />}
+              label="Settings"
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+            />
+          </Box>
+        </List>
       </Box>
 
-      <Divider sx={{ my: 2 }} />
-
-      <List
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: "78vh",
-        }}
-      >
-        <Box>
-          <SidebarItem
-            icon={<Dashboard />}
-            label="Dashboard"
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-          />
-          <SidebarItem
-            icon={<Person2Icon />}
-            label="Profile"
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-          />
-          <SidebarItem
-            icon={<AccessTime />}
-            label="Attendance"
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-          />
-          <SidebarItem
-            icon={<Description />}
-            label="Payslips"
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-          />
-          <SidebarItem
-            icon={<AccountBalance />}
-            label="Salary Info"
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-          />
-          <SidebarItem
-            icon={<Settings />}
-            label="Settings"
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-          />
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button
-            variant="outlined"
-            color="error"
-            startIcon={<LogoutIcon />}
-            sx={{
-              textTransform: "none",
-              borderRadius: "50px",
-              px: 3,
-              fontWeight: 500,
-            }}
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-        </Box>
-      </List>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          variant="outlined"
+          color="error"
+          startIcon={<LogoutIcon />}
+          sx={{
+            textTransform: "none",
+            borderRadius: "50px",
+            px: 3,
+            fontWeight: 500,
+          }}
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      </Box>
     </Box>
   );
 
@@ -146,7 +151,7 @@ export default function Sidebar() {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
-            boxShadow: "2px 0px 5px rgba(0, 0, 0, 0.1)"
+            boxShadow: "2px 0px 5px rgba(0, 0, 0, 0.1)",
           },
         }}
       >

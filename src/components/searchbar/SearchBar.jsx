@@ -11,7 +11,7 @@ export default function SearchBar({ placeholder = "Search..." }) {
         alignItems: "center",
         width: "100%",
         maxWidth: 400,
-        mb: 3,
+        // mb: 3,
         borderRadius: "12px",
         boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
         backgroundColor: "#fff",

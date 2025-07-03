@@ -4,7 +4,6 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,10 +11,15 @@ import { resetForm } from "./redux/FormSlice";
 import "./Form.css";
 import tick from "../../assets/tick.png";
 
-import FormStep0, { validateStep0 } from "./formStep0/FormStep0";
-import FormStep1, { validateStep1 } from "./formStep1/FormStep1";
-import FormStep2, { validateStep2 } from "./formStep2/FormStep2";
-import Avatar from "@mui/material/Avatar";
+import PersonalDetailsForm, {
+  validateStep0,
+} from "./personalDetailsForm/PersonalDetailsForm";
+import AddressDetailsForm, {
+  validateStep1,
+} from "./addressDetailsForm/AddressDetailsForm";
+import BankDetailsForm, {
+  validateStep2,
+} from "./bankDetailsForm/BankDetailsForm";
 
 const steps = ["Personal Details", "Address Details", "Bank Details"];
 
@@ -52,26 +56,42 @@ export default function Form() {
     if (!isCurrentStepValid) return;
     setActiveStep(steps.length);
     setShowOverlay(true);
-    // handleReset()
     dispatch(resetForm());
   };
 
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <FormStep0 />;
+        return <PersonalDetailsForm />;
       case 1:
-        return <FormStep1 />;
+        return <AddressDetailsForm />;
       case 2:
-        return <FormStep2 />;
+        return <BankDetailsForm />;
       default:
         return "Unknown Step";
     }
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Paper elevation={5} sx={{ p: { xs: 3, md: 5 }, borderRadius: 4 }}>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: "100%",
+        px: { xs: 2, md: 4 },
+        py: 4,
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Paper
+        elevation={5}
+        sx={{
+          width: "100%",
+          maxWidth: "1200px",
+          p: { xs: 3, md: 5 },
+          borderRadius: 4,
+        }}
+      >
         <Typography
           variant="h5"
           fontWeight="bold"
@@ -86,15 +106,9 @@ export default function Form() {
             <Step key={label}>
               <StepLabel
                 sx={{
-                  "& .MuiStepIcon-root": {
-                    color: "#ccc",
-                  },
-                  "& .MuiStepIcon-root.Mui-active": {
-                    color: "#6F6BFA",
-                  },
-                  "& .MuiStepIcon-root.Mui-completed": {
-                    color: "#6F6BFA",
-                  },
+                  "& .MuiStepIcon-root": { color: "#ccc" },
+                  "& .MuiStepIcon-root.Mui-active": { color: "#6F6BFA" },
+                  "& .MuiStepIcon-root.Mui-completed": { color: "#6F6BFA" },
                 }}
               >
                 {label}
@@ -138,43 +152,36 @@ export default function Form() {
                   Back
                 </Button>
 
-                {activeStep === steps.length - 1 ? (
-                  <Button
-                    sx={{ bgcolor: "#6F6BFA" }}
-                    variant="contained"
-                    type="submit"
-                    disabled={!isCurrentStepValid}
-                  >
-                    Submit
-                  </Button>
-                ) : (
-                  <Button
-                    sx={{ bgcolor: "#6F6BFA" }}
-                    variant="contained"
-                    onClick={handleNext}
-                    disabled={!isCurrentStepValid}
-                  >
-                    Next
-                  </Button>
-                )}
+                <Button
+                  sx={{ bgcolor: "#6F6BFA" }}
+                  variant="contained"
+                  type={activeStep === steps.length - 1 ? "submit" : "button"}
+                  onClick={
+                    activeStep === steps.length - 1 ? undefined : handleNext
+                  }
+                  disabled={!isCurrentStepValid}
+                >
+                  {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                </Button>
               </Box>
             </>
           )}
         </form>
       </Paper>
+
       {showOverlay && (
         <Box
           sx={{
             position: "fixed",
             top: 0,
-            left: 150,
+            left: 0,
             width: "100vw",
             height: "100vh",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            zIndex: 5,
+            zIndex: 5000,
           }}
         >
           <Paper
@@ -209,6 +216,6 @@ export default function Form() {
           </Paper>
         </Box>
       )}
-    </Container>
+    </Box>
   );
 }

@@ -17,15 +17,39 @@ export default function Dashboard() {
           py: 6,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "stretch",
         }}
       >
-        <Box sx={{ width: "100%", display:'flex', justifyContent:'center' }}>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            mb: 4,
+          }}
+        >
           <SearchBar placeholder="Search Employee Form Sections..." />
         </Box>
 
-        <Form />
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            boxSizing: "border-box",
+          }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: "100%",
+              boxSizing: "border-box",
+            }}
+          >
+            <Form />
+          </Box>
+        </Box>
       </Box>
     </Box>
-  )
+  );
 }
